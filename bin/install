@@ -11,10 +11,9 @@ doc_fail() {
 [ "${ASDF_INSTALL_TYPE}" == 'ref' ] && doc_fail "This plugin does not support installing by ref."
 [ -z "${ASDF_INSTALL_VERSION}" ] && doc_fail "Unspecified install version."
 [ -z "${ASDF_INSTALL_PATH}" ] && doc_fail "No installation directory was provided. Are you running this command via asdf? Try running 'asdf install asciidoctorj <version>'"
-[ -x "$(which unzip)" -o -x "$(which curl)" ] || echo "Missing one of either of the following dependencies: unzip, curl"
+[ -x "$(which unzip)" -o -x "$(which curl)" ] || doc_fail "Missing one of either of the following dependencies: unzip, curl"
 
 ASDF_DOC_DIR="$(mktemp -d -t asdf-asciidoctorj-XXXXXXX)"
-echo "${ASDF_DOC_DIR}"
 
 cd "${ASDF_DOC_DIR}"
 

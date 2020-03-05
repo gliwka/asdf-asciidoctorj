@@ -1,5 +1,7 @@
 = asdf-asciidoctorj
 
+image::https://github.com/gliwka/asdf-asciidoctorj/workflows/CI/badge.svg?branch=master[CI]
+
 asciidoctorj plugin for the https://asdf-vm.com/[asdf] version manager.
 
 == Requirements

@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -o nounset -o pipefail -o errexit
+IFS=$'\t\n'
+
+doc_fail() {
+  >&2 echo "⛔ $*"
+  exit 1
+}
+
+[ "${ASDF_INSTALL_TYPE}" == 'ref' ] && doc_fail "This plugin does not support installing by ref."
+[ -z "${ASDF_INSTALL_VERSION}" ] && doc_fail "Unspecified install version."
+[ -z "${ASDF_INSTALL_PATH}" ] && doc_fail "No installation directory was provided. Are you running this command via asdf? Try running 'asdf install asciidoctorj <version>'"
+[ -x "$(which unzip)" -o -x "$(which curl)" ] || echo "Missing one of either of the following dependencies: unzip, curl"
+
+ASDF_DOC_DIR="$(mktemp -d -t asdf-asciidoctorj-XXXXXXX)"
+echo "${ASDF_DOC_DIR}"
+
+cd "${ASDF_DOC_DIR}"
+
+curl -sSL -o "asciidoctorj-${ASDF_INSTALL_VERSION}-bin.zip" "https://repo1.maven.org/maven2/org/asciidoctor/asciidoctorj/${ASDF_INSTALL_VERSION}/asciidoctorj-${ASDF_INSTALL_VERSION}-bin.zip"
+
+unzip "asciidoctorj-${ASDF_INSTALL_VERSION}-bin.zip"
+
+if [ -d "${ASDF_INSTALL_PATH}" ]; then
+    # Remove existing install directory
+    rm -fR "${ASDF_INSTALL_PATH}"
+fi
+
+# Create parent directory, if necessary
+mkdir -p "$(dirname "${ASDF_INSTALL_PATH}")"
+
+# Finish the installation
+mv "${ASDF_DOC_DIR}/asciidoctorj-${ASDF_INSTALL_VERSION}" "${ASDF_INSTALL_PATH}"
+rm -rf "${ASDF_DOC_DIR}"

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -o nounset -o pipefail -o errexit
+
+doc_fail() {
+  >&2 echo "⛔ $*"
+  exit 1
+}
+
+[ -x "$(which curl)" ] || doc_fail "Missing the following dependency: curl"
+
+
+curl -s https://repo1.maven.org/maven2/org/asciidoctor/asciidoctorj/ | awk 'match($0, /<a href="[^.][^\/]+\/"/) { print substr( $0, RSTART+9, RLENGTH-11)}' | awk '{if (NR > 2) {printf "%s ", $0}}'

@@ -1,0 +1,16 @@
+= asdf-asciidoctorj
+
+asciidoctorj plugin for the https://asdf-vm.com/[asdf] version manager.
+
+== Requirements
+
+This plugin should work out of the box on Linux and Mac operating systems.
+If one of the commands needed is unavailable, it will let you know.
+
+You need to have java installed to run asciidoctorj. asdf might help you here ;-)
+
+== Installing
+
+```
+asdf plugin-add asciidoctorj https://github.com/gliwka/asdf-asciidoctorj.git
+```

@@ -54,4 +54,9 @@ asdf install asciidoctorj 2.2.0
 
 ```
 
+Apply asciidoctorj locally
 
+```
+asdf local asciidoctorj 2.2.0
+
+```

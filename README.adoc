@@ -16,7 +16,7 @@ You need to have java installed to run asciidoctorj. asdf might help you here ;-
 Add plugin
 
 ```
-asdf plugin-add asciidoctorj https://github.com/gliwka/asdf-asciidoctorj.git
+asdf plugin-add asciidoctorj
 ```
 
 List versions
